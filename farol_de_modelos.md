@@ -1,6 +1,6 @@
 # Farol de Modelos
 
-Neste guia, definiremos limiares para determinar se um modelo é considerado “bom” ou “ruim”. Usando a analogia de um farol, classificaremos os modelos em três categorias: verde (bom), amarelo (aceitável) e vermelho (ruim). Cada uma das categorias exigirá uma ação diferente - <strong> acompanhar </strong> (verde), <strong> investigar </strong> (amarelo) ou <strong> retreinar </strong> (vermelho).
+Neste guia, definiremos limiares para determinar se um modelo é considerado “bom” ou “ruim”. Usando a analogia de um farol, classificaremos os modelos em três categorias: verde (bom), amarelo (aceitável) e vermelho (ruim). Cada uma das categorias exigirá uma ação diferente - <strong> acompanhar </strong> (verde), <strong> investigar </strong> (amarelo) ou <strong> retreinar ou reajuste </strong> (vermelho).
 
 <center>
 <img src="farol_modelos.png" width="400"/>
@@ -16,10 +16,15 @@ A classificação de um modelo em uma dessas categorias será baseada primeirame
             1. [Índice Gini](#1.1.1.1.-Índice-Gini)
             2. [Área Sob a Curva ROC (ROC AUC)](#1.1.1.2.-Área-Sob-a-Curva-ROC-(ROC-AUC))
             3. [Teste Kolmogorov-Smirnov (KS)](#1.1.1.3.-Teste-Kolmogorov-Smirnov-(KS))
+            4. [Variações das Métricas de Poder](#1.1.1.4.-Variações-das-Métricas-de-Poder)
         2. [Métricas de Estabilidade](#1.1.2.-Métricas-de-Estabilidade)
             1. [PSI (População Stability Index)](#1.1.2.1.-PSI-(População-Stability-Index))
             2. [Teste Kolmogorov-Smirnov (KS)](#1.1.2.2.-Teste-Kolmogorov-Smirnov-(KS))
-    
+            3. [Variações de Público e Target](#1.1.2.3.-Variações-de-Público-e-Target)
+    2. [Categoria Final do Farol de Modelos (Classificação Binária)](#1.2.-Categoria-Final-do-Farol-de-Modelos-(Classificação-Binária))
+2. [Regressão](#2.-Regressão)
+3. [Modelos Causais](#3.-Modelos-Causais)
+4. [Referências](#4.-Referências)
 
 ## 1. Classificação Binária
 
@@ -50,6 +55,15 @@ O teste KS é comumente usada para medir a <strong>distância</strong> entre dua
 - Amarelo: KS nos primeiros 3 decis e entre 20% e 25% (aceitável)
 - Vermelho: KS menor que 20% (pobre separação)
 
+##### 1.1.1.4. Variações das Métricas de Poder
+Sendo o poder discriminatório o principal eixo de avaliação de um modelo de classificação binária para a maioria das aplicações, também iremos monitorar as variações das métricas de poder discriminatório do período de validação OOT para o período de inferência atual. A seguir, definimos os limiares que empregaremos.	
+<strong>Limiares</strong>:
+- Verde: Variação ≤ -5% (pouca mudança)
+- Amarelo: -15% ≤ Variação ≤ -5% e Variação ≥ 50% (mudança moderada)
+- Vermelho: Variação < - 15% (mudança significativa)
+
+A variação nas métricas de poder, em particular uma queda significativa de poder discriminatório é um dos principais indicativos de que um modelo pode estar sofrendo de <strong>degradação</strong>, e, portanto, é um dos indicadores chave do <strong>farol de modelos</strong>.
+
 #### 1.1.2. Métricas de Estabilidade
 
 <strong>Estabilidade</strong> refere-se à capacidade de um modelo de manter seu desempenho ao longo do tempo. As métricas de estabilidade comuns incluem o PSI (População Stability Index) e o teste Kolmogorov-Smirnov (KS).
@@ -67,3 +81,34 @@ O teste KS, também poder ser utilizado para mensurar a estabilidade de modelos.
 - Verde: KS ≤ 10% (pouco ou nenhum desvio)
 - Amarelo: 10% < Drift ≤ 20% (desvio moderado)
 - Vermelho: Drift > 20% (desvio significativo)
+
+##### 1.1.2.3. Variações de Público e Target
+
+A variação de público e target é um dos indicativos de que um modelo pode sofrer <strong>degradação de poder</strong>, se tornando instável. Portanto, é um dos indicadores chave do <strong>farol de modelos</strong> e grandes variações exigem <strong>investigação</strong>, dado que muitas vezes há razões de negócio para as mesmas, sendo que o cientista deveria estar ciente dessas razões nestes casos. A seguir, definimos os limiares que empregaremos.
+<strong>Limiares</strong>:
+- Verde: -30% ≤ Variação ≤ -30% (pouca mudança)
+- Amarelo: Variação < -30% e Variação > 30% (mudança moderada)
+
+### 1.2. Categoria Final do Farol de Modelos (Classificação Binária)
+
+- <strong>Vermelho</strong>: Se um modelo estiver vermelho em pelo menos uma das métricas de <strong>poder discriminatório</strong>, o modelo será considerado vermelho e deverá ser retreinado.
+- <strong>Amarelo</strong>: o modelo será considerado amarelo se estiver amarelo em pelo menos uma das métricas de poder discriminatório ou estabilidade.
+- <strong>Verde</strong>: Se um modelo estiver verde em todas as métricas de poder discriminatório e estabilidade, o modelo será considerado verde.
+
+Quando o modelo estiver nas categorias amarelo ou vermelho, o cientista de dados deve investigar as causas ou tomar as ações necessárias para corrigir o problema - como por exemplo, um retreino. <strong> O cientista deverá documentar e formalizar as ações tomadas e resultados obtidos por meio de um email ou outro documento</strong>.
+
+## 2. Regressão
+
+Este guia ainda não possui informações sobre modelos de regressão. Os limiares e métricas de avaliação serão definidos em futuras atualizações.
+
+## 3. Modelos Causais
+
+Este guia ainda não possui informações sobre modelos causais. Os limiares e métricas de avaliação serão definidos em futuras atualizações.
+
+## 4. Referências
+
+- [Benchmarking Default Prediction Models](https://www.rogermstein.com/wp-content/uploads/BenchmarkingDefaultPredictionModels_TR030124.pdf)
+- [How to Evaluate and Monitor Performance of AI Models for Financial Risk Management: A Practical Guide](https://medium.com/anolytics/how-to-evaluate-and-monitor-performance-of-ai-models-for-financial-risk-management-a-practical-b600d50140cb)
+- [Understanding Kolmogorov-Smirnov (KS) Tests for Data Drift on Profiled Data](https://towardsdatascience.com/understanding-kolmogorov-smirnov-ks-tests-for-data-drift-on-profiled-data-5c8317796f78)
+- [The Gini Coefficient](https://www.dss.uniroma1.it/RePec/mtn/articoli/2005-1-1.pdf)
+- [The Kolmogorov-Smirnov Test for Goodness of Fit](https://www.itl.nist.gov/div898/handbook/eda/section3/eda35g.htm)
