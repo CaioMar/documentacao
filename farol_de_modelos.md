@@ -107,8 +107,8 @@ Este guia ainda não possui informações sobre modelos causais. Os limiares e m
 
 ## 4. Referências
 
-- [Benchmarking Default Prediction Models](https://www.rogermstein.com/wp-content/uploads/BenchmarkingDefaultPredictionModels_TR030124.pdf)
-- [How to Evaluate and Monitor Performance of AI Models for Financial Risk Management: A Practical Guide](https://medium.com/anolytics/how-to-evaluate-and-monitor-performance-of-ai-models-for-financial-risk-management-a-practical-b600d50140cb)
-- [Understanding Kolmogorov-Smirnov (KS) Tests for Data Drift on Profiled Data](https://towardsdatascience.com/understanding-kolmogorov-smirnov-ks-tests-for-data-drift-on-profiled-data-5c8317796f78)
-- [The Gini Coefficient](https://www.dss.uniroma1.it/RePec/mtn/articoli/2005-1-1.pdf)
-- [The Kolmogorov-Smirnov Test for Goodness of Fit](https://www.itl.nist.gov/div898/handbook/eda/section3/eda35g.htm)
+1) [Benchmarking Default Prediction Models](https://www.rogermstein.com/wp-content/uploads/BenchmarkingDefaultPredictionModels_TR030124.pdf)
+2) [How to Evaluate and Monitor Performance of AI Models for Financial Risk Management: A Practical Guide](https://medium.com/anolytics/how-to-evaluate-and-monitor-performance-of-ai-models-for-financial-risk-management-a-practical-b600d50140cb)
+3) [Understanding Kolmogorov-Smirnov (KS) Tests for Data Drift on Profiled Data](https://towardsdatascience.com/understanding-kolmogorov-smirnov-ks-tests-for-data-drift-on-profiled-data-5c8317796f78)
+4) [The Gini Coefficient](https://www.dss.uniroma1.it/RePec/mtn/articoli/2005-1-1.pdf)
+5) [The Kolmogorov-Smirnov Test for Goodness of Fit](https://www.itl.nist.gov/div898/handbook/eda/section3/eda35g.htm)
